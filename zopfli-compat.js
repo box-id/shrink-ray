@@ -1,5 +1,5 @@
 module.exports = function zopfliCompat(useZopfliForGzip) {
-  if (useZopfliForGzip) {
+  /*if (useZopfliForGzip) {
     try {
       return require('node-zopfli-es');
     } catch (e) {
@@ -11,7 +11,7 @@ module.exports = function zopfliCompat(useZopfliForGzip) {
         }
       );
     }
-  }
+  }*/
 
   // Fall back to plain zlib.
   return require('zlib');
