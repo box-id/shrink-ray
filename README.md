@@ -1,4 +1,4 @@
-# shrink-ray-whiteout-zopfli
+# shrink-ray-without-zopfli
 
 The original [shrink-ray-current](https://www.npmjs.com/package/shrink-ray-current)
 
