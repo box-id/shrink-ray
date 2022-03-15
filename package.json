@@ -1,7 +1,7 @@
 {
-  "name": "shrink-ray-whiteout-zopfli",
+  "name": "shrink-ray-without-zopfli",
   "description": "Node.js compression middleware with brotli",
-  "version": "5.0.1",
+  "version": "1.0.0",
   "contributors": [
     "Js Guillemette (https://github.com/jsguil)",
     "Arturas Molcanovas <a.molcanovas@gmail.com> (https://github.com/Alorel)",
