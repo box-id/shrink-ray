@@ -1,7 +1,7 @@
 {
   "name": "shrink-ray-without-zopfli",
   "description": "Node.js compression middleware with brotli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     "Js Guillemette (https://github.com/jsguil)",
     "Arturas Molcanovas <a.molcanovas@gmail.com> (https://github.com/Alorel)",
@@ -55,7 +55,6 @@
     "coveralls": "^3.1.0",
     "doctoc": "^2.0.0",
     "expect": "^26.6.2",
-    "iltorb": "^2.4.5",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
     "proxyquire": "^2.1.0",
