@@ -1,7 +1,7 @@
 {
   "name": "@boxid/shrink-ray",
   "description": "Node.js compression middleware with brotli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     "Js Guillemette (https://github.com/jsguil)",
     "Arturas Molcanovas <a.molcanovas@gmail.com> (https://github.com/Alorel)",
