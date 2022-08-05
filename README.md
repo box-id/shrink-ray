@@ -1,15 +1,19 @@
 # shrink-ray-without-zopfli
 
-The original [shrink-ray-current](https://www.npmjs.com/package/shrink-ray-current)
+The original [shrink-ray-current](https://www.npmjs.com/package/shrink-ray-current) includes outdated dependencies.
+The following has been modified:
+
+- Removed `iltorb`, since native brotli support has been available since node 10.16
+- Updated `node-zopfli-es` to a version that compiles without python2.7. It has also been made an optional peer dependency (s.t. it can be left out without an NPM warning if it causes problems in the future)
 
 Node.js compression middleware with modern codings like brotli and zopfli.
 
 The following compression codings are supported:
 
-  - deflate
-  - gzip
-  - brotli
-  - zopfli (for asynchronous compression of static assets only)
+- deflate
+- gzip
+- brotli
+- zopfli (for asynchronous compression of static assets only)
 
 In addition, if a response contains an ETag, `shrink-ray-current` will cache the compressed
 result for later requests and even re-compress it asynchronously at the highest
@@ -30,7 +34,6 @@ project.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Install](#install)
   - [Peer Dependencies](#peer-dependencies)
@@ -99,7 +102,7 @@ warning at install time.)_
 # API
 
 ```js
-const shrinkRay = require('shrink-ray-current');
+const shrinkRay = require("shrink-ray-current");
 ```
 
 ## `shrinkRay([options])`
@@ -215,17 +218,17 @@ compression). The special value `-1` can be used to mean the "default
 compression level", which is a default compromise between speed and
 compression (currently equivalent to level 6).
 
-  - `-1` Default compression level (also `zlib.Z_DEFAULT_COMPRESSION`).
-  - `0` No compression (also `zlib.Z_NO_COMPRESSION`).
-  - `1` Fastest compression (also `zlib.Z_BEST_SPEED`).
-  - `2`
-  - `3`
-  - `4`
-  - `5`
-  - `6` (currently what `zlib.Z_DEFAULT_COMPRESSION` points to).
-  - `7`
-  - `8`
-  - `9` Best compression (also `zlib.Z_BEST_COMPRESSION`).
+- `-1` Default compression level (also `zlib.Z_DEFAULT_COMPRESSION`).
+- `0` No compression (also `zlib.Z_NO_COMPRESSION`).
+- `1` Fastest compression (also `zlib.Z_BEST_SPEED`).
+- `2`
+- `3`
+- `4`
+- `5`
+- `6` (currently what `zlib.Z_DEFAULT_COMPRESSION` points to).
+- `7`
+- `8`
+- `9` Best compression (also `zlib.Z_BEST_COMPRESSION`).
 
 The default value is `zlib.Z_DEFAULT_COMPRESSION`, or `-1`.
 
@@ -248,19 +251,19 @@ This is used to tune the compression algorithm. This value only affects the
 compression ratio, not the correctness of the compressed output, even if it
 is not set appropriately.
 
-  - `zlib.Z_DEFAULT_STRATEGY` Use for normal data.
-  - `zlib.Z_FILTERED` Use for data produced by a filter (or predictor).
-    Filtered data consists mostly of small values with a somewhat random
-    distribution. In this case, the compression algorithm is tuned to
-    compress them better. The effect is to force more Huffman coding and less
-    string matching; it is somewhat intermediate between `zlib.Z_DEFAULT_STRATEGY`
-    and `zlib.Z_HUFFMAN_ONLY`.
-  - `zlib.Z_FIXED` Use to prevent the use of dynamic Huffman codes, allowing
-    for a simpler decoder for special applications.
-  - `zlib.Z_HUFFMAN_ONLY` Use to force Huffman encoding only (no string match).
-  - `zlib.Z_RLE` Use to limit match distances to one (run-length encoding).
-    This is designed to be almost as fast as `zlib.Z_HUFFMAN_ONLY`, but give
-    better compression for PNG image data.
+- `zlib.Z_DEFAULT_STRATEGY` Use for normal data.
+- `zlib.Z_FILTERED` Use for data produced by a filter (or predictor).
+  Filtered data consists mostly of small values with a somewhat random
+  distribution. In this case, the compression algorithm is tuned to
+  compress them better. The effect is to force more Huffman coding and less
+  string matching; it is somewhat intermediate between `zlib.Z_DEFAULT_STRATEGY`
+  and `zlib.Z_HUFFMAN_ONLY`.
+- `zlib.Z_FIXED` Use to prevent the use of dynamic Huffman codes, allowing
+  for a simpler decoder for special applications.
+- `zlib.Z_HUFFMAN_ONLY` Use to force Huffman encoding only (no string match).
+- `zlib.Z_RLE` Use to limit match distances to one (run-length encoding).
+  This is designed to be almost as fast as `zlib.Z_HUFFMAN_ONLY`, but give
+  better compression for PNG image data.
 
 **Note** in the list above, `zlib` is from `zlib = require('zlib')`.
 
@@ -287,10 +290,10 @@ The default `filter` function. This is used to construct a custom filter
 function that is an extension of the default function.
 
 ```js
-app.use(shrinkRay({filter: shouldCompress}));
+app.use(shrinkRay({ filter: shouldCompress }));
 
 function shouldCompress(req, res) {
-  if (req.headers['x-no-compression']) {
+  if (req.headers["x-no-compression"]) {
     // don't compress responses with this request header
     return false;
   }
@@ -313,8 +316,8 @@ When using this module with express or connect, simply `app.use` the module as
 high as you like. Requests that pass through the middleware will be compressed.
 
 ```js
-const shrinkRay = require('shrink-ray-current');
-const express = require('express');
+const shrinkRay = require("shrink-ray-current");
+const express = require("express");
 const app = express();
 
 // compress all requests
@@ -334,28 +337,28 @@ You can achieve this by calling `res.flush()` when you need the data written to
 actually make it to the client.
 
 ```js
-const shrinkRay = require('shrink-ray-current');
-const express   = require('express');
-const app       = express();
+const shrinkRay = require("shrink-ray-current");
+const express = require("express");
+const app = express();
 
 // compress responses
 app.use(shrinkRay());
 
 // server-sent event stream
-app.get('/events', (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
+app.get("/events", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
 
   // send a ping approx every 2 seconds
   const timer = setInterval(() => {
-    res.write('data: ping\n\n');
+    res.write("data: ping\n\n");
 
     // !!! this is the important part
     res.flush();
   }, 2000);
 
-  res.on('close', () => {
-    clearInterval(timer)
-  })
+  res.on("close", () => {
+    clearInterval(timer);
+  });
 });
 ```
