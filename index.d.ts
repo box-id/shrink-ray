@@ -1,6 +1,5 @@
-import {Request, RequestHandler, Response} from 'express';
-import {BrotliEncodeParams} from 'iltorb';
-import {ZlibOptions} from 'zlib';
+import { Request, RequestHandler, Response } from "express";
+import { ZlibOptions, BrotliOptions } from "zlib";
 
 interface Filterable {
   /**
@@ -22,7 +21,7 @@ interface ShrinkRayOptions extends Filterable {
    * Note that unlike the standard brotli library, which defaults to quality 11, this library defaults to quality 4,
    * which is generally more appropriate for dynamic content.
    */
-  brotli?: Partial<BrotliEncodeParams>;
+  brotli?: Partial<BrotliOptions>;
 
   /**
    * The approximate size, in bytes, of the cache. This is a number of bytes, any string accepted by the bytes module,

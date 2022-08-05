@@ -4,7 +4,8 @@ The original [shrink-ray-current](https://www.npmjs.com/package/shrink-ray-curre
 The following has been modified:
 
 - Removed `iltorb`, since native brotli support has been available since node 10.16
-- Updated `node-zopfli-es` to a version that compiles without python2.7. It has also been made an optional peer dependency (s.t. it can be left out without an NPM warning if it causes problems in the future)
+  - Due to the way that brotli options are processed, the old iltorb option keys have to be used which get mapped to the zlib brotli options. This is currently typed incorrectly, though (pretending to accept zlib options to avoid typescript compiler errors).
+- Removed `node-zopfli-es`, as the modern version (2.0.1) is an es module that requires the use of dynamic import, which causes a ripple of effects throughout the whole library.
 
 Node.js compression middleware with modern codings like brotli and zopfli.
 
